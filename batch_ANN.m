@@ -8,9 +8,10 @@
 % Plot the confusion matrix to see how well the retained ANN is handling the new data
 
 clear;
-% load a dummy dataset; the parameters are based on exploration of coral reefs with crown-of-thorns starfish outbreaks
-% the dataset contains 8 'environmental' variables, which can be continuous, discrete or binary
-% the output is binary, 1 = presence 0 = absence
+% load dummy datasets; file with the data can be dowloaded from this same folder;
+% the parameters and their values are based on exploratory analysis of coral reefs with crown-of-thorns starfish outbreaks
+% the datasets contain 8 'environmental' variables, which can be continuous, discrete or binary
+% the outputs are binary, 1 = presence 0 = absence
 load('annbatchtrain.mat')
 input = train_data';% desginate data part of the ANN analysis
 target = train_output';% designate output part of the ANN analysis
@@ -43,7 +44,7 @@ for ann = 1:200
     [misclass_samples, conf_mat] = confusion(train_output', output);% get the fraction of misclassified samples and a confusion matrix for the traning dataset
     truepos = conf_mat(2, 2)/(sum(conf_mat(:, 2)));% calculate the true postive rate of this ANN
     trueneg = conf_mat(1, 1)/(sum(conf_mat(:, 1)));% calculate the true negative rate of this ANN
-    detectrate = conf_mat(2, 2)/(sum(conf_mat(2, :)));% calculate precision of this ANN
+    detectrate = conf_mat(2, 2)/(sum(conf_mat(2, :)));% calculate precision/positive predictive value of this ANN
     if ((truepos >= reject_tp) + (trueneg >= reject_tn) + (detectrate >= reject_dr) + (misclass_samples <= reject_all)) == 4% iff all the criteria are satisified
         % use the classification performance values from this ANN as the new set of criteria for future ANN rejection
         reject_all = misclass_samples;
