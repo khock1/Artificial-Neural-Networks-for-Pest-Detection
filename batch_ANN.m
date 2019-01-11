@@ -1,4 +1,4 @@
-% Author: Karlo Hock, University of Queensland.
+% Author: Karlo Hock, University of Queensland. (c) 
 
 % Run an ensebmle of Artificial Neural Networks (ANNs) for detection of pests in habitat patches
 % Set up ANN
